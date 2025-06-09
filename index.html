@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Webster Map Game - Base64 Background</title>
+<title>Webster Map Game</title>
 <style>
   body {
     margin: 0;
@@ -17,8 +17,9 @@
     position: relative;
     width: 600px;
     height: 450px;
-    /* Base64 embedded image as background */
-    background: webster map.png;
+    /* Use the local image as background */
+    background: url('webster map.png') no-repeat center center;
+    background-size: cover;
     border: 4px solid #666;
     box-sizing: border-box;
   }
