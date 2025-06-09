@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Webster Map Game - Base64 Background</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #game {
+    position: relative;
+    width: 600px;
+    height: 450px;
+    /* Base64 embedded image as background */
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAFACAIAAABTIZtqAAAJzUlEQVR4nO3dQU7jMBRA0QXx//9db8EXyEIRJAzHtmVqD0Fpc8sg1zZ7MaCDAyPbn6vR07EREREREREREREREREREREbHuB6PcL/7cOmhmBaLzywHILIAwFCOhdgZkNlgIALECBEAYCuA8LIMADAUgXhcAogIAYAcDcCIIA0CUh4XAGiAgBgBwNwIggDQJSFheFAAoBICgFgrgPCyDAAwFIF4XAKICAGAHAnAiCANAlIeFwBoiw5IV0z2J5Vq+95qH9bR1/PfS+v1u5RZyuT0XAoD9bLRBz6wFj0WzWAID8YzAwj0cxD/1cbwHA6ArAwDYcIyHA+Lkg3iAzAwj8cxD/xcbzHA2APAwDwcIxD/nckwHAwD7HCMyHjkg3iIzAwj8cxD/xcbzHA2APAwDwcIxD/nckwHAwD7HCMyHjkg3iIzAwj8cxD/xcbzHA2APAwDwcIxD/nckwHAwD7HCMyHjkg3iIzAwj8cxD/xcbzHA2APAwDwcIxD/nckwHAwD7HCMyHjkg3iIzAwj8cxD/xcbzHA2APAwDwcIxD/nckwHAwD7HCMyHjkg3iIzAwj8cxD/xcbzHA2APAwDwIYBqGZfowAAAABJRU5ErkJggg==') no-repeat center center;
+    background-size: cover;
+    border: 4px solid #666;
+    box-sizing: border-box;
+  }
+  #player {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-color: red;
+    border: 2px solid white;
+    top: 209px;
+    left: 284px;
+    transition: top 0.05s, left 0.05s;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<div id="game">
+  <div id="player"></div>
+</div>
+
+<script>
+  const player = document.getElementById("player");
+  const game = document.getElementById("game");
+  const step = 10;
+
+  let computedStyle = window.getComputedStyle(player);
+  let pos = {
+    top: parseInt(computedStyle.top, 10),
+    left: parseInt(computedStyle.left, 10)
+  };
+
+  document.addEventListener("keydown", (e) => {
+    switch (e.key) {
+      case "ArrowUp":
+        if (pos.top - step >= 0) pos.top -= step;
+        break;
+      case "ArrowDown":
+        if (pos.top + step <= game.clientHeight - player.clientHeight) pos.top += step;
+        break;
+      case "ArrowLeft":
+        if (pos.left - step >= 0) pos.left -= step;
+        break;
+      case "ArrowRight":
+        if (pos.left + step <= game.clientWidth - player.clientWidth) pos.left += step;
+        break;
+    }
+    player.style.top = pos.top + "px";
+    player.style.left = pos.left + "px";
+  });
+</script>
+
+</body>
+</html>
